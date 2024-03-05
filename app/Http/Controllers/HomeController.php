@@ -7,10 +7,10 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class IndexController extends Controller
+class HomeController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Index/Index');
+        return Inertia::render('Home/HomeIndex');
     }
 }
