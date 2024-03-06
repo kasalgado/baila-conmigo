@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,15 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->tinyText('email')->unique();
-            $table->tinyText('password');
-            $table->string('firstname', 32);
-            $table->string('lastname', 32);
-            $table->timestamp('birthday');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
+            $table->tinyText('street');
+            $table->string('sector', 32);
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('addresses');
     }
 };

@@ -1,5 +1,5 @@
 <template>
-    <Link href="/">Home</Link> | <Link href="/profile">Profile</Link>
+    <Link href="/">Home</Link> | <Link href="/profile">Profile</Link> | <Link href="/user">Users</Link>
     <div>Logged time: {{ timer }}</div>
     <slot></slot>
 </template>
