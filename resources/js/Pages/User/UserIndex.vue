@@ -1,7 +1,7 @@
 <template>
   <h3>List of users:</h3>
   <div v-for="user in users" :key="user.id">
-    <Link :href="`/user/${user.id}`">
+    <Link :href="route('user.show', user.id)">
       <UserNames :user="user" />
     </Link>
   </div>

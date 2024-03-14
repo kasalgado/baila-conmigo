@@ -44,7 +44,7 @@ class ContactController extends Controller
             ])
         );
 
-        return redirect()->route('contact.index')->with('success', 'Contact message created.');
+        return redirect()->route('contact.index')->with('success', 'Message was created.');
     }
 
     /**
@@ -64,6 +64,6 @@ class ContactController extends Controller
     {
         $contact->delete();
 
-        return redirect()->route('contact.index');
+        return redirect()->route('contact.index')->with('success', 'Message was deleted.');
     }
 }

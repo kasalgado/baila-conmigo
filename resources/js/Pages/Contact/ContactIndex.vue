@@ -1,7 +1,7 @@
 <template>
   <h3>Contact messages:</h3>
   <div v-for="contact in contacts" :key="contact.id">
-    <Link :href="`/contact/${contact.id}`">
+    <Link :href="route('contact.show', contact.id)">
       <div>{{ contact.id }} | {{ contact.message }}</div>
       <ContactDeleteButton :contact="contact" />
     </Link>

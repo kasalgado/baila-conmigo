@@ -1,5 +1,5 @@
 <template>
-  <Link href="/">Home</Link> | <Link href="/profile">Profile</Link> | <Link href="/user">Users</Link> | <Link href="/contact/create">Contact</Link> | <Link href="/contact">Messages</Link>
+  <Link href="/">Home</Link> | <Link href="/profile">Profile</Link> | <Link :href="route('user.index')">Users</Link> | <Link :href="route('contact.create')">Contact</Link> | <Link :href="route('contact.index')">Messages</Link>
   <div>Logged time: {{ timer }}</div>
   <div v-if="flashSuccess">
     {{ flashSuccess }}

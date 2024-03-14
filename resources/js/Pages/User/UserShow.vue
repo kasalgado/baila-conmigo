@@ -3,8 +3,8 @@
     <div><UserNames :user="user" /></div>
     <div>{{ user.birthday }}</div>
     <div>
-      <Link :href="`/user/${user.id}/edit`" as="button">Edit</Link>
-      <Link :href="`/user/${user.id}`" method="delete" as="button">Delete</Link>
+      <Link :href="route('user.edit', user.id)" as="button">Edit</Link>
+      <Link :href="route('user.destroy', user.id)" method="delete" as="button">Delete</Link>
     </div>
 </template>
 

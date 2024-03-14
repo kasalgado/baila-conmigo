@@ -1,5 +1,5 @@
 <template>
-  <div><Link :href="`/contact/${contact.id}`" method="delete" as="button">Delete</Link></div>
+  <div><Link :href="route('contact.destroy', contact.id)" method="delete" as="button">Delete</Link></div>
 </template>
 
 <script setup>
