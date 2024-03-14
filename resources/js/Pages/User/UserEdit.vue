@@ -35,5 +35,5 @@ const form = useForm({
   lastname: props.user.lastname,
   birthday: props.user.birthday
 })
-const update = () => form.put(`/user/${props.user.id}`)
+const update = () => form.put(route('user.update', props.user.id))
 </script>

@@ -37,5 +37,5 @@ const form = useForm({
   email: null,
   message: null
 })
-const create = () => form.post('/contact')
+const create = () => form.post(route('contact.store'))
 </script>
