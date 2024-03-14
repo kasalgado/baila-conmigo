@@ -35,9 +35,16 @@ class ContactController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        Contact::create($request->all());
+        Contact::create(
+            $request->validate([
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'email' => 'required|email',
+                'message' => 'required|min:10',
+            ])
+        );
 
-        return redirect()->route('contact.index');
+        return redirect()->route('contact.index')->with('success', 'Contact message created.');
     }
 
     /**

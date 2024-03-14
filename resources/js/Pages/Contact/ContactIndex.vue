@@ -3,12 +3,13 @@
   <div v-for="contact in contacts" :key="contact.id">
     <Link :href="`/contact/${contact.id}`">
       <div>{{ contact.id }} | {{ contact.message }}</div>
-      <div><Link :href="`/contact/${contact.id}`" method="delete" as="button">Delete</Link></div>
+      <ContactDeleteButton :contact="contact" />
     </Link>
   </div>
 </template>
 
 <script setup>
+import ContactDeleteButton from '@/Components/ContactDeleteButton.vue'
 import { Link } from '@inertiajs/vue3'
 
 defineProps({

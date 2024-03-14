@@ -20,4 +20,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/profile', [ProfileController::class, 'index']);
 Route::resource('/user', UserController::class);
-Route::resource('/contact', ContactController::class)->only('index', 'show', 'create', 'store', 'destroy');
+Route::resource('/contact', ContactController::class)->except('edit', 'updated');
