@@ -1,10 +1,37 @@
 <template>
-  <Link href="/">Home</Link> | <Link href="/profile">Profile</Link> | <Link :href="route('user.index')">Users</Link> | <Link :href="route('contact.create')">Contact</Link> | <Link :href="route('contact.index')">Messages</Link>
-  <div>Logged time: {{ timer }}</div>
-  <div v-if="flashSuccess">
-    {{ flashSuccess }}
-  </div>
-  <slot></slot>
+  <header class="border-b border-gray-200 bg-white">
+    <div class="container mx-auto">
+      <nav class="flex justify-between">
+        <div class="flex justify-start">
+          <div class="p-2">
+            <Link href="/">Home</Link>
+          </div>
+          <div class="p-2">
+            <Link href="/profile">Profile</Link>
+          </div>
+          <div class="p-2">
+            <Link :href="route('user.index')">Users</Link>
+          </div>
+          <div class="p-2">
+            <Link :href="route('contact.create')">Contact</Link>
+          </div>
+          <div class="p-2">
+            <Link :href="route('contact.index')">Messages</Link>
+          </div>
+        </div>
+        <div class="p-2">
+          Logged time: {{ timer }}
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mx-auto p-4">
+    <div v-if="flashSuccess" class="mb-4 border rounded-md shadow-sm border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900 p-2">
+      {{ flashSuccess }}
+    </div>
+    <slot></slot>
+  </main>
 </template>
 
 <script setup>

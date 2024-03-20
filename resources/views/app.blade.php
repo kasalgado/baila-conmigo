@@ -5,10 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Baila Conmigo</title>
         @routes
+        @vite('resources/css/app.css')
         @vite('resources/js/app.js')
         @inertiaHead
     </head>
-    <body class="antialiased">
+    <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-300">
         @inertia 
     </body>
 </html>
