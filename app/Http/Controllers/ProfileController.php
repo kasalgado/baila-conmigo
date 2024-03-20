@@ -12,7 +12,17 @@ class ProfileController extends Controller
 {
     public function index(): Response
     {
-        $user = User::find(3);
+        $user = User::find(1);
+
+        return Inertia::render('Profile/ProfileIndex', [
+            'user' => $user,
+            'address' => $user->address,
+        ]);
+    }
+
+    public function show(int $id): Response
+    {
+        $user = User::find($id);
 
         return Inertia::render('Profile/ProfileIndex', [
             'user' => $user,

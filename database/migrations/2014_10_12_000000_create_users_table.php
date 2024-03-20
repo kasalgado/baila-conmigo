@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->tinyText('email')->unique();
             $table->tinyText('password');
+            $table->tinyText('username')->unique();
             $table->string('firstname', 32);
             $table->string('lastname', 32);
             $table->timestamp('birthday');

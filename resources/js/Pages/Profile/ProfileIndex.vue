@@ -1,5 +1,5 @@
 <template>
-    <div class="text-2xl">Username</div>
+    <div class="text-2xl">{{ user.username }} (<UserAge :user="user" />)</div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <UIBox class="items-center">
             <div class="text-center w-full">Picture</div>
@@ -21,6 +21,7 @@
 
 <script setup>
 import UIBox from '@/Components/UI/UIBox.vue'
+import UserAge from '@/Components/UserAge.vue'
 
 defineProps({
   user: Object,
