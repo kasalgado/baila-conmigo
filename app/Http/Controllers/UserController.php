@@ -39,6 +39,7 @@ class UserController extends Controller
     {
         return Inertia::render('User/UserShow', [
             'user' => $user,
+            'address' => $user->address,
         ]);
     }
 

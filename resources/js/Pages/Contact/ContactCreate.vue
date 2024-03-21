@@ -1,31 +1,31 @@
 <template>
-  <div>
-    <form @submit.prevent="create">
+  <form @submit.prevent="create">
+    <div class="grid grid-cols-1 gap-6">
+      <label class="block">
+        <span class="text-gray-700">Nombres:</span>
+        <input class="input-primary" v-model="form.firstname" type="text" name="firstname" />
+        <span class="text-sm text-red-800" v-if="form.errors.firstname">{{ form.errors.firstname }}</span>
+      </label>
+      <label class="block">
+        <span class="text-gray-700">Apellidos:</span>
+        <input class="input-primary" v-model="form.lastname" type="text" name="lastname" />
+        <span class="text-sm text-red-800" v-if="form.errors.lastname">{{ form.errors.lastname }}</span>
+      </label>
+      <label class="block">
+        <span class="text-gray-700">Email:</span>
+        <input class="input-primary" v-model="form.email" type="email" name="email" />
+        <span class="text-sm text-red-800" v-if="form.errors.email">{{ form.errors.email }}</span>
+      </label>
+      <label class="block">
+        <span class="text-gray-700">Message:</span>
+        <textarea class="input-primary" v-model="form.message"></textarea>
+        <span class="text-sm text-red-800" v-if="form.errors.message">{{ form.errors.message }}</span>
+      </label>
       <div>
-        <label>Firstname</label>
-        <input v-model="form.firstname" type="text" name="firstname" />
-        <div v-if="form.errors.firstname">{{ form.errors.firstname }}</div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" type="submit">Enviar</button>
       </div>
-      <div>
-        <label>Lastname</label>
-        <input v-model="form.lastname" type="text" name="lastname" />
-        <div v-if="form.errors.lastname">{{ form.errors.lastname }}</div>
-      </div>
-      <div>
-        <label>Email</label>
-        <input v-model="form.email" type="text" name="email" />
-        <div v-if="form.errors.email">{{ form.errors.email }}</div>
-      </div>
-      <div>
-        <label>Message</label>
-        <input v-model="form.message" type="textarea" name="message" />
-        <div v-if="form.errors.message">{{ form.errors.message }}</div>
-      </div>
-      <div>
-        <button type="submit">Create</button>
-      </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </template>
 
 <script setup>
