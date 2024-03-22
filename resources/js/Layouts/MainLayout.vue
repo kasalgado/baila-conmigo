@@ -7,6 +7,9 @@
             <Link href="/">Home</Link>
           </div>
           <div class="p-2">
+            <Link href="/search">Search</Link>
+          </div>
+          <div class="p-2">
             <Link href="/profile">Profile</Link>
           </div>
           <div class="p-2">
