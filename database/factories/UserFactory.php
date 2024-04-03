@@ -29,7 +29,9 @@ class UserFactory extends Factory
             'username' => fake()->userName(),
             'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
-            'birthday' => fake()->dateTimeBetween($startDate = '-30 years', $endDate = '-18 years', $timezone = null),
+            'birthday' => fake()
+                ->dateTimeBetween($startDate = '-30 years', $endDate = '-18 years', $timezone = null)
+                ->format('Y-m-d'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];

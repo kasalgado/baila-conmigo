@@ -19,5 +19,6 @@ class Address extends Model
     protected $fillable = [
         'street',
         'sector',
+        'user_id',
     ];
 }

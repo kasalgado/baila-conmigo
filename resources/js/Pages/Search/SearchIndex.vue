@@ -47,5 +47,5 @@ const form = useForm({
   minimum,
   maximum
 })
-const create = () => form.post('/search/list')
+const create = () => form.post(route('search.list'))
 </script>

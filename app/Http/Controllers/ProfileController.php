@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
     public function index(): Response
     {
-        $user = User::find(1);
+        $user = auth()->user();
 
         return Inertia::render('Profile/ProfileIndex', [
             'user' => $user,

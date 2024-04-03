@@ -4,32 +4,36 @@
       <nav class="flex justify-between">
         <div class="flex justify-start">
           <div class="p-2">
-            <Link href="/">Home</Link>
+            <Link :href="route('home')">Home</Link>
           </div>
-          <div class="p-2">
-            <Link href="/search">Search</Link>
+          <div v-if="user" class="p-2">
+            <Link :href="route('search')">Search</Link>
           </div>
-          <div class="p-2">
-            <Link href="/profile">Profile</Link>
+          <div v-if="user" class="p-2">
+            <Link :href="route('profile.index')">Profile</Link>
           </div>
-          <div class="p-2">
+          <div v-if="user" class="p-2">
             <Link :href="route('user.index')">Users</Link>
           </div>
           <div class="p-2">
             <Link :href="route('contact.create')">Contact</Link>
           </div>
-          <div class="p-2">
+          <div v-if="user" class="p-2">
             <Link :href="route('contact.index')">Messages</Link>
           </div>
         </div>
-        <div class="p-2">
-          Logged time: {{ timer }}
+        <div v-if="user" class="p-2">
+          <Link :href="route('logout')" method="delete" as="button">Salir</Link>
+        </div>
+        <div v-else class="flex items-center gap-2">
+          <Link :href="route('register.create')">Registrarse</Link>
+          <Link :href="route('login')">Ingresar</Link>
         </div>
       </nav>
     </div>
   </header>
 
-  <main class="container mx-auto p-4">
+  <main class="container mx-auto p-4 w-full">
     <div v-if="flashSuccess" class="mb-4 border rounded-md shadow-sm border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900 p-2">
       {{ flashSuccess }}
     </div>
@@ -39,13 +43,13 @@
 
 <script setup>
 import { Link, usePage } from '@inertiajs/vue3'
-import { ref, computed } from 'vue'
-
-const timer = ref(0)
-setInterval(() => timer.value++, 1000)
+import { computed } from 'vue'
 
 const page = usePage()
 const flashSuccess = computed(
   () => page.props.flash.success
+)
+const user = computed(
+  () => page.props.user
 )
 </script>
