@@ -7,6 +7,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Address;
+use App\Models\Message;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,12 +17,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(10)->has(Address::factory(1))->create();
+        $userCollection = \App\Models\User::factory(10)->has(Address::factory(1))->create();
         \App\Models\Contact::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $userCollection->each(function ($item, $key) {
+            $userIds = array_diff(range(1, 10), [$item->id]);
+
+            Message::factory(10)->create([
+                'user_id' => $item->id,
+                'from_user_id' => $userIds[array_rand($userIds)],
+            ]);
+        });
     }
 }

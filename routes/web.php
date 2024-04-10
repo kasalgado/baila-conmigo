@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
@@ -35,3 +36,4 @@ Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 
 Route::resource('/register', RegisterController::class)->only('create', 'store');
 Route::resource('/address', AddressController::class)->only('create', 'store');
+Route::resource('/message', MessageController::class)->only('index', 'show', 'destroy')->middleware('auth');

@@ -4,22 +4,25 @@
       <nav class="flex justify-between">
         <div class="flex justify-start">
           <div class="p-2">
-            <Link :href="route('home')">Home</Link>
+            <Link :href="route('home')">Inicio</Link>
           </div>
           <div v-if="user" class="p-2">
-            <Link :href="route('search')">Search</Link>
+            <Link :href="route('message.index')">Mensajes</Link>
           </div>
           <div v-if="user" class="p-2">
-            <Link :href="route('profile.index')">Profile</Link>
+            <Link :href="route('search')">Buscar</Link>
           </div>
           <div v-if="user" class="p-2">
-            <Link :href="route('user.index')">Users</Link>
+            <Link :href="route('profile.index')">Profil</Link>
+          </div>
+          <div v-if="user" class="p-2">
+            <Link :href="route('user.index')">Usuarios</Link>
           </div>
           <div class="p-2">
-            <Link :href="route('contact.create')">Contact</Link>
+            <Link :href="route('contact.create')">Contacto</Link>
           </div>
           <div v-if="user" class="p-2">
-            <Link :href="route('contact.index')">Messages</Link>
+            <Link :href="route('contact.index')">Pendientes</Link>
           </div>
         </div>
         <div v-if="user" class="p-2">

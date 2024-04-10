@@ -4,12 +4,12 @@
     <div>Lastname: {{ contact.lastname }}</div>
     <div>Email: {{ contact.email }}</div>
     <div>Message: {{ contact.message }}</div>
-    <ContactDeleteButton :contact="contact" />
+    <DeleteButton :route="route('contact.destroy', contact.id)" />
   </div>
 </template>
 
 <script setup>
-import ContactDeleteButton from '@/Components/ContactDeleteButton.vue'
+import DeleteButton from '@/Components/UI/DeleteButton.vue'
 
 defineProps({
   contact: Object
