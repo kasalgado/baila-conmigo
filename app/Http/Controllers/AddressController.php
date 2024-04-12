@@ -21,7 +21,7 @@ class AddressController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $address = Address::create($request->validate([
+        Address::create($request->validate([
             'street' => 'required|string|max:64',
             'sector' => 'required|string|max:32',
             'user_id' => 'required|numeric',

@@ -58,13 +58,19 @@ class User extends Authenticatable
         return $this->hasOne(Address::class);
     }
 
-    public function messages(): HasMany
+    /**
+     * Define OneToOne relation to Message for from_user
+     */
+    public function fromUser(): HasOne
     {
-        return $this->hasMany(Message::class, 'user_id');
+        return $this->hasOne(Message::class);
     }
 
-    public function from(): HasMany
+    /**
+     * Define OneToOne relation to Message for to_user
+     */
+    public function toUser(): HasOne
     {
-        return $this->hasMany(Message::class, 'from_user_id');
+        return $this->hasOne(Message::class);
     }
 }

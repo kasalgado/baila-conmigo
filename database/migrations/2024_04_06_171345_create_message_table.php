@@ -17,14 +17,18 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->text('message');
-            $table->boolean('readed');
+            $table->boolean('readed')->default(false);
             $table->timestamps();
         });
+
         Schema::table('messages', function (Blueprint $table) {
-            $table->foreignIdFor(User::class, 'user_id')->constrained('users');
+            $table->unsignedBigInteger('from_user_id');
+            $table->foreign('from_user_id')->references('id')->on('users');
         });
+
         Schema::table('messages', function (Blueprint $table) {
-            $table->foreignIdFor(User::class, 'from_user_id')->constrained('users');
+            $table->unsignedBigInteger('to_user_id');
+            $table->foreign('to_user_id')->references('id')->on('users');
         });
     }
 

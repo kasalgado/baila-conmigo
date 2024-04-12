@@ -36,4 +36,4 @@ Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 
 Route::resource('/register', RegisterController::class)->only('create', 'store');
 Route::resource('/address', AddressController::class)->only('create', 'store');
-Route::resource('/message', MessageController::class)->only('index', 'show', 'destroy')->middleware('auth');
+Route::resource('/message', MessageController::class)->only('index', 'show', 'create', 'store', 'destroy')->middleware('auth');

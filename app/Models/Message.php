@@ -19,16 +19,7 @@ class Message extends Model
      */
     protected $fillable = [
         'message',
-        'readed',
+        'from_user_id',
+        'to_user_id',
     ];
-
-    public function owner(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function fromOwner(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'from_user_id');
-    }
 }

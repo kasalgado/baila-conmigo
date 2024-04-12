@@ -1,12 +1,16 @@
 <template>
   <div class="text-2xl text-gray-500">Tus mensajes:</div>
+  <div>
+    <Link :href="route('message.index')">Recibidos</Link> |
+    <Link :href="route('message.index', {'type': 'sent'})">Enviados</Link>
+  </div>
   <UIBox v-for="message in messages" :key="message.id" class="mb-4">
-    <Link :href="route('profile.show', message.from_user.id)" as="button">
-      <span class="font-bold text-gray-500">{{ message.from_user.username }}</span>
+    <Link :href="route('profile.show', message.from_user_id.id)" as="button">
+      <span class="font-bold text-gray-500">{{ message.from_user_id.username }}</span>
     </Link>
-    <div>{{ message.message.message }}</div>
-    <Link :href="route('message.show', message.message.id)" as="button">Abrir</Link> |
-    <Link :href="route('message.destroy', message.message.id)" as="button" method="delete">Borrar</Link>
+    <div>{{ message.message }}</div>
+    <Link :href="route('message.show', message.id)" as="button">Abrir</Link> |
+    <Link :href="route('message.destroy', message.id)" as="button" method="delete">Borrar</Link>
   </UIBox>
 </template>
 

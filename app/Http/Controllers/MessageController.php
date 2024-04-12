@@ -13,17 +13,17 @@ use Inertia\Response;
 
 class MessageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request): Response
     {
-        $userMessages = $request->user()->messages;
-        $messages = [];
+        if ($request->type == 'sent') {
+            $messages = Message::where(['from_user_id' => $request->user()->id])->get();
+        } else {
+            $messages = Message::where(['to_user_id' => $request->user()->id])->get();
+        }
 
-        foreach ($userMessages as $key => $message) {
-            $messages[$key]['from_user'] = User::find($message->from_user_id);
-            $messages[$key]['message'] = $message;
+        foreach ($messages as $key => $message) {
+            $fromUser = User::find($message->from_user_id);
+            $messages[$key]->from_user_id = $fromUser;
         }
 
         return Inertia::render('Message/MessageIndex', [
@@ -31,54 +31,38 @@ class MessageController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $request): Response
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id): Response
-    {
-        $message = Message::find($id);
-
-        return Inertia::render('Message/MessageShow', [
-            'message' => $message,
-            'from_user' => User::find($message->from_user_id),
+        return Inertia::render('Message/MessageCreate', [
+            'from_user_id' => $request->user(),
+            'to_user_id' => User::find($request->to_user_id),
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $message = Message::create($request->validate([
+            'message' => 'required|string|min:50',
+            'from_user_id' => 'required|numeric',
+            'to_user_id' => 'required|numeric',
+        ]));
+
+        return redirect()->route('message.index')->with('success', 'Mensaje enviado');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function show(string $id): Response
     {
-        //
+        $message = Message::find($id);
+        $this->authorize('view', $message);
+
+        $message->from_user_id = User::find($message->from_user_id);
+        $message->to_user_id = User::find($message->to_user_id);
+
+        return Inertia::render('Message/MessageShow', [
+            'message' => $message,
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Message $message): RedirectResponse
     {
         $message->delete();

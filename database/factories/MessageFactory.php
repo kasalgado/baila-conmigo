@@ -20,7 +20,6 @@ class MessageFactory extends Factory
     {
         return [
             'message' => fake()->text(50),
-            'readed' => false,
         ];
     }
 }
