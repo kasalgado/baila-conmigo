@@ -9,8 +9,8 @@
       <div>{{ message.message }}</div>
     </UIBox>
   </div>
-  <button class="btn-primary me-2">
-    <Link v-if="answer" :href="route('message.create', {'from_user_id': message.to_user_id.id, 'to_user_id': message.from_user_id.id})" as="button">
+  <button v-if="answer" class="btn-primary me-2">
+    <Link :href="route('message.create', {'from_user_id': message.to_user_id.id, 'to_user_id': message.from_user_id.id})" as="button">
       Responder
     </Link>
   </button>
