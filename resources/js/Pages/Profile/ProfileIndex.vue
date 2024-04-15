@@ -17,9 +17,11 @@
     <UIBox class="mt-4">
         <div>Dance Preferences</div>
     </UIBox>
-    <Link v-if="fromUser" :href="route('message.create', {'from_user_id': fromUser.id, 'to_user_id': user.id})" as="button">
-        Mensaje
-    </Link>
+    <button v-if="fromUser" class="btn-primary mt-2">
+        <Link :href="route('message.create', {'from_user_id': fromUser.id, 'to_user_id': user.id})" as="button">
+            Mensaje
+        </Link>
+    </button>
 </template>
 
 <script setup>
