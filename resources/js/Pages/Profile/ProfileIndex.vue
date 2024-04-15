@@ -17,14 +17,19 @@
     <UIBox class="mt-4">
         <div>Dance Preferences</div>
     </UIBox>
+    <Link v-if="fromUser" :href="route('message.create', {'from_user_id': fromUser.id, 'to_user_id': user.id})" as="button">
+        Mensaje
+    </Link>
 </template>
 
 <script setup>
 import UIBox from '@/Components/UI/UIBox.vue'
 import UserAge from '@/Components/UserAge.vue'
+import { Link } from '@inertiajs/vue3'
 
 defineProps({
   user: Object,
-  address: Object
+  address: Object,
+  fromUser: Object
 })
 </script>

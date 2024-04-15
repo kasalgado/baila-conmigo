@@ -23,7 +23,7 @@ class MessagePolicy
      */
     public function view(User $user, Message $message): bool
     {
-        return $user->id === $message->to_user_id;
+        return $user->id === $message->from_user_id || $user->id === $message->to_user_id;
     }
 
     /**

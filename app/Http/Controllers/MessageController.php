@@ -6,24 +6,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use App\Models\User;
+use App\Services\MessageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class MessageController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request, MessageService $messageService): Response
     {
         if ($request->type == 'sent') {
-            $messages = Message::where(['from_user_id' => $request->user()->id])->get();
+            $messages = $messageService->getSent($request->user());
         } else {
-            $messages = Message::where(['to_user_id' => $request->user()->id])->get();
-        }
-
-        foreach ($messages as $key => $message) {
-            $fromUser = User::find($message->from_user_id);
-            $messages[$key]->from_user_id = $fromUser;
+            $messages = $messageService->getReceived($request->user());
         }
 
         return Inertia::render('Message/MessageIndex', [
@@ -41,7 +38,7 @@ class MessageController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $message = Message::create($request->validate([
+        Message::create($request->validate([
             'message' => 'required|string|min:50',
             'from_user_id' => 'required|numeric',
             'to_user_id' => 'required|numeric',
@@ -60,6 +57,7 @@ class MessageController extends Controller
 
         return Inertia::render('Message/MessageShow', [
             'message' => $message,
+            'user' => Auth::user(),
         ]);
     }
 

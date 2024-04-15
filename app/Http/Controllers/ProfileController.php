@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -17,6 +18,7 @@ class ProfileController extends Controller
         return Inertia::render('Profile/ProfileIndex', [
             'user' => $user,
             'address' => $user->address,
+            'fromUser' => null,
         ]);
     }
 
@@ -27,6 +29,7 @@ class ProfileController extends Controller
         return Inertia::render('Profile/ProfileIndex', [
             'user' => $user,
             'address' => $user->address,
+            'fromUser' => Auth::user() !== $user ? Auth::user() : null,
         ]);
     }
 }

@@ -9,7 +9,9 @@
       <div>{{ message.message }}</div>
     </UIBox>
   </div>
-  <Link :href="route('message.create', {'from_user_id': message.to_user_id.id, 'to_user_id': message.from_user_id.id})" as="button">Responder</Link>
+  <Link v-if="answer" :href="route('message.create', {'from_user_id': message.to_user_id.id, 'to_user_id': message.from_user_id.id})" as="button">
+    Responder
+  </Link>
   <DeleteButton :route="route('message.destroy', message.id)" />
 </template>
 
@@ -19,9 +21,14 @@ import UserAge from '@/Components/UserAge.vue'
 import UIBox from '@/Components/UI/UIBox.vue'
 import { formatDate } from '@/Composables/formatDate'
 import DeleteButton from '@/Components/UI/DeleteButton.vue'
+import { computed } from 'vue'
 
 const props = defineProps({
-  message: Object
+  message: Object,
+  user: Object
 })
 const { formated } = formatDate(props.message.created_at)
+const answer = computed(
+  () => props.user.id !== props.message.from_user_id.id
+)
 </script>
