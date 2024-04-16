@@ -11,6 +11,8 @@ use App\Models\Contact;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,5 +32,17 @@ class DatabaseSeeder extends Seeder
                 'to_user_id' => $userIds[array_rand($userIds)],
             ]);
         });
+
+        User::factory()->has(Address::factory())->create([
+            'email' => 'admin@test.de',
+            'password' => Hash::make('password'),
+            'username' => 'admin',
+            'firstname' => 'User',
+            'lastname' => 'Admin',
+            'birthday' => date('Y-m-d', strtotime('-20 year')),
+            'is_admin' => true,
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+        ]);
     }
 }

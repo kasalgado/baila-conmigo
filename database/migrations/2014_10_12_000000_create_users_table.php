@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('firstname', 32);
             $table->string('lastname', 32);
             $table->date('birthday')->format('Y-m-d');
+            $table->boolean('is_admin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -15,13 +15,13 @@
           <div v-if="user" class="p-2">
             <Link :href="route('profile.index')">Profil</Link>
           </div>
-          <div v-if="user" class="p-2">
+          <div v-if="user && user.is_admin" class="p-2">
             <Link :href="route('user.index')">Usuarios</Link>
           </div>
           <div class="p-2">
             <Link :href="route('contact.create')">Contacto</Link>
           </div>
-          <div v-if="user" class="p-2">
+          <div v-if="user && user.is_admin" class="p-2">
             <Link :href="route('contact.index')">Pendientes</Link>
           </div>
         </div>

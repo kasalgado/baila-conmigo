@@ -12,6 +12,11 @@ use Inertia\Response;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
+
     public function index(): Response
     {
         return Inertia::render('User/UserIndex', [
