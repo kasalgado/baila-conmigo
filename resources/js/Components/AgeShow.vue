@@ -6,12 +6,12 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  user: Object
+  profile: Object
 })
 
 const age = computed(function () {
   const currentDate = new Date()
-  const birthday = new Date(props.user.birthday)
+  const birthday = new Date(props.profile.birthday)
   const difference = currentDate - birthday
 
   return Math.floor(difference / 31557600000)

@@ -27,13 +27,13 @@
 import { useForm } from '@inertiajs/vue3'
 
 const props = defineProps({
-  user: Object
+  profile: Object
 })
 
 const form = useForm({
-  firstname: props.user.firstname,
-  lastname: props.user.lastname,
-  birthday: props.user.birthday
+  firstname: props.profile.firstname,
+  lastname: props.profile.lastname,
+  birthday: props.profile.birthday
 })
 const update = () => form.put(route('user.update', props.user.id))
 </script>

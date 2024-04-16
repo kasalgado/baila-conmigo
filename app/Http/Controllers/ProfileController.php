@@ -13,23 +13,23 @@ class ProfileController extends Controller
 {
     public function index(): Response
     {
-        $user = auth()->user();
+        $profile = auth()->user();
 
         return Inertia::render('Profile/ProfileIndex', [
-            'user' => $user,
-            'address' => $user->address,
+            'profile' => $profile,
+            'address' => $profile->address,
             'fromUser' => null,
         ]);
     }
 
     public function show(int $id): Response
     {
-        $user = User::find($id);
+        $profile = User::find($id);
 
         return Inertia::render('Profile/ProfileIndex', [
-            'user' => $user,
-            'address' => $user->address,
-            'fromUser' => Auth::user() !== $user ? Auth::user() : null,
+            'profile' => $profile,
+            'address' => $profile->address,
+            'fromUser' => Auth::user() !== $profile ? Auth::user() : null,
         ]);
     }
 }

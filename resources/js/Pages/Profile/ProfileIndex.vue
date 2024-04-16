@@ -1,12 +1,12 @@
 <template>
-    <div class="text-2xl">{{ user.username }} (<UserAge :user="user" />)</div>
+    <div class="text-2xl">{{ profile.username }} (<AgeShow :profile="profile" />)</div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <UIBox class="items-center">
             <div class="text-center w-full">Picture</div>
         </UIBox>
         <UIBox>
-            <div class="text-2xl">{{ user.firstname }}</div>
-            <div class="text-2xl">{{ user.lastname }}</div>
+            <div class="text-2xl">{{ profile.firstname }}</div>
+            <div class="text-2xl">{{ profile.lastname }}</div>
             <div class="text-gray-500">{{ address.street }}</div>
             <div class="text-gray-500">{{ address.sector }}</div>
         </UIBox>
@@ -18,7 +18,7 @@
         <div>Dance Preferences</div>
     </UIBox>
     <button v-if="fromUser" class="btn-primary mt-2">
-        <Link :href="route('message.create', {'from_user_id': fromUser.id, 'to_user_id': user.id})" as="button">
+        <Link :href="route('message.create', {'from_user_id': fromUser.id, 'to_user_id': profile.id})" as="button">
             Mensaje
         </Link>
     </button>
@@ -26,11 +26,11 @@
 
 <script setup>
 import UIBox from '@/Components/UI/UIBox.vue'
-import UserAge from '@/Components/UserAge.vue'
+import AgeShow from '@/Components/AgeShow.vue'
 import { Link } from '@inertiajs/vue3'
 
 defineProps({
-  user: Object,
+  profile: Object,
   address: Object,
   fromUser: Object
 })
