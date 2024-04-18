@@ -27,8 +27,7 @@ Route::resource('/contact', ContactController::class)->except('edit', 'updated')
 
 Route::resource('/profile', ProfileController::class)->only('index', 'show')->middleware('auth');
 Route::resource('/user', UserController::class)->middleware('auth');
-Route::get('/search', [SearchController::class, 'index'])->name('search')->middleware('auth');
-Route::post('/search/list', [SearchController::class, 'list'])->name('search.list')->middleware('auth');
+Route::get('/search', [SearchController::class, 'index'])->name('search.index')->middleware('auth');
 
 Route::get('login', [AuthController::class, 'create'])->name('login');
 Route::post('login', [AuthController::class, 'store'])->name('login.store');

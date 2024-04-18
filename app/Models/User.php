@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -72,5 +74,27 @@ class User extends Authenticatable
     public function toUser(): HasOne
     {
         return $this->hasOne(Message::class);
+    }
+
+    public function scopeCreatedAt(Builder $query): Builder
+    {
+        return $query->orderByDesc('created_at');
+    }
+
+    public function scopeFilter(Builder $query, array $filters): Builder
+    {
+        return $query
+            ->when(
+                isset($filters['username']) ? $filters['username'] : null,
+                fn ($query, $value) => $query->where('username', 'like', '%' . $value . '%')
+            )
+            ->when(
+                isset($filters['maximum']) ? date('Y-m-d', strtotime($filters['maximum'] . ' years ago')) : null,
+                fn ($query, $value) => $query->where('birthday', '>=', $value)
+            )
+            ->when(
+                isset($filters['minimum']) ? date('Y-m-d', strtotime($filters['minimum'] . ' years ago')) : null,
+                fn ($query, $value) => $query->where('birthday', '<=', $value)
+            );
     }
 }

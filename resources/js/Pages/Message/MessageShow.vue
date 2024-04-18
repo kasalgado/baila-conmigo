@@ -1,6 +1,6 @@
 <template>
   <div class="text-2xl">{{ message.from_user_id.username }} (<AgeShow :profile="message.from_user_id" />)</div>
-  <div class="text-gray-500">{{ formated }}</div>
+  <div class="text-gray-500">{{ createdAt }}</div>
   <div class="grid grid-cols-12 gap-4 mt-2 mb-2">
     <UIBox class="items-center col-span-12 md:col-span-2">
       <div class="text-center w-full">Picture</div>
@@ -29,7 +29,7 @@ const props = defineProps({
   message: Object,
   user: Object
 })
-const { formated } = formatDate(props.message.created_at)
+const { createdAt } = formatDate(props.message.created_at)
 const answer = computed(
   () => props.user.id !== props.message.from_user_id.id
 )

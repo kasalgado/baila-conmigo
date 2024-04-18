@@ -1,51 +1,90 @@
 <template>
-  <form @submit.prevent="create">
-    <div class="grid grid-cols-1 gap-6">
-      <label class="block">
-        <span class="text-gray-500 font-bold">Nombre:</span>
-        <input class="input-primary" v-model="form.name" type="text" name="name" />
-        <span class="text-sm text-red-800" v-if="form.errors.name">{{ form.errors.name }}</span>
-      </label>
-      <div>
-        <label class="text-gray-500 font-bold">Edad: {{ form.minimum }} - {{ form.maximum }}</label>
-        <div class="mb-2">
-          <span>min:</span> <input
-            v-model.number="form.minimum"
-            class="align-middle bg-gray-200 rounded-lg appearance-none cursor-pointer"
-            type="range"
-            min="18"
-            max="99"
-            step="1"
-            name="minimum" />
+  <div class="grid grid-cols-12 gap-4">
+    <form @submit.prevent="filter" class="col-span-12 md:col-span-2 md:border-r md:pr-2">
+      <div class="grid grid-cols-1 gap-2">
+        <div class="text-2xl">Buscar:</div>
+        <label class="block">
+          <span class="text-blue-800">Usuario:</span>
+          <input class="input-primary" v-model="form.username" type="text" username="name" />
+          <span class="text-sm text-red-800" v-if="form.errors.username">{{ form.errors.username }}</span>
+        </label>
+        <div>
+          <label class="text-blue-800">Edad: {{ form.minimum }} - {{ form.maximum }}</label>
+          <div class="mb-2">
+            <span>min:</span> <input
+              v-model.number="form.minimum"
+              class="align-middle bg-gray-200 rounded-lg appearance-none cursor-pointer w-full"
+              type="range"
+              min="18"
+              max="99"
+              step="1"
+              ref="minimum" />
+          </div>
+          <div class="align-middle">
+            <span>max:</span> <input
+              v-model.number="form.maximum"
+              class="align-middle bg-gray-200 rounded-lg appearance-none cursor-pointer w-full"
+              type="range"
+              min="18"
+              max="99"
+              step="1"
+              ref="maximum" />
+          </div>
         </div>
-        <div class="align-middle">
-          <span>max:</span> <input
-            v-model.number="form.maximum"
-            class="align-middle bg-gray-200 rounded-lg appearance-none cursor-pointer"
-            type="range"
-            min="18"
-            max="99"
-            step="1"
-            name="maximum"/>
+        <div>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" type="submit">Buscar</button>
+        </div>
+        <div>
+          <button class="text-center w-full text-gray-600 font-bold" type="reset" @click="clear">Resetear</button>
         </div>
       </div>
-      <div>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" type="submit">Buscar</button>
+    </form>
+    <div class="col-span-12 md:col-span-10">
+      <div v-for="profile in profiles.data" :key="profile.id" class="grid grid-cols-12 gap-2 border-b border-blue-200 mb-4 pb-4">
+        <UIBox class="col-span-12 md:col-span-2">Picture</UIBox>
+        <UIBox class="col-span-12 md:col-span-10">
+          {{ profile.username }} (<AgeShow :profile="profile" />)
+        </UIBox>
       </div>
     </div>
-  </form>
+  </div>
+  <div v-if="profiles.data.length" class="w-full flex justify-center mt-4 mb-4">
+    <UIPagination :links="profiles.links" />
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
+import UIBox from '@/Components/UI/UIBox.vue'
+import AgeShow from '@/Components/AgeShow.vue'
+import UIPagination from '@/Components/UI/UIPagination.vue'
 
-const minimum = ref(1)
-const maximum = ref(99)
-const form = useForm({
-  name: null,
-  minimum,
-  maximum
+const props = defineProps({
+  profiles: Object,
+  filters: Object
 })
-const create = () => form.post(route('search.list'))
+
+const minimum = ref(18)
+const maximum = ref(99)
+
+const form = useForm({
+  username: props.filters.username ?? null,
+  minimum: props.filters.minimum ?? minimum,
+  maximum: props.filters.maximum ?? maximum
+})
+
+const filter = () => {
+  form.get('search'), {
+    preserveState: true,
+    preserveScroll: true
+  }
+}
+
+const clear = () => {
+  form.username = null,
+  form.minimum = 18,
+  form.maximum = 99,
+  filter()
+}
 </script>

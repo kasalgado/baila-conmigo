@@ -10,7 +10,7 @@
             <Link :href="route('message.index')">Mensajes</Link>
           </div>
           <div v-if="user" class="p-2">
-            <Link :href="route('search')">Buscar</Link>
+            <Link :href="route('search.index')">Buscar</Link>
           </div>
           <div v-if="user" class="p-2">
             <Link :href="route('profile.index')">Profil</Link>
