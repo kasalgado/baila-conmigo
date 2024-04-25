@@ -8,6 +8,7 @@ namespace Database\Seeders;
 
 use App\Models\Address;
 use App\Models\Contact;
+use App\Models\Favorite;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -30,6 +31,11 @@ class DatabaseSeeder extends Seeder
             Message::factory(3)->create([
                 'from_user_id' => $user->id,
                 'to_user_id' => $userIds[array_rand($userIds)],
+            ]);
+
+            Favorite::factory(1)->create([
+                'user_id' => $user->id,
+                'fav_user_id' => $userIds[array_rand($userIds)],
             ]);
         });
 
