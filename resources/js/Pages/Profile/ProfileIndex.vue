@@ -1,5 +1,5 @@
 <template>
-    <div class="text-2xl">{{ profile.username }} (<AgeShow :profile="profile" />)</div>
+    <div class="text-2xl">{{ profile.username }} (<UserAge :profile="profile" />)</div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <UIBox class="items-center">
             <div class="text-center w-full">Picture</div>
@@ -26,7 +26,7 @@
 
 <script setup>
 import UIBox from '@/Components/UI/UIBox.vue'
-import AgeShow from '@/Components/AgeShow.vue'
+import UserAge from '@/Components/User/UserAge.vue'
 import { Link } from '@inertiajs/vue3'
 
 defineProps({

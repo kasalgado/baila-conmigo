@@ -9,7 +9,7 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3'
-import UserNames from '@/Components/UserNames.vue'
+import UserNames from '@/Components/User/UserNames.vue'
 import UIBox from '@/Components/UI/UIBox.vue'
 
 defineProps({

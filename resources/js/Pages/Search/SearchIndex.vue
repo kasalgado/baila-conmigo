@@ -40,11 +40,8 @@
       </div>
     </form>
     <div class="col-span-12 md:col-span-10">
-      <div v-for="profile in profiles.data" :key="profile.id" class="grid grid-cols-12 gap-2 border-b border-blue-200 mb-4 pb-4">
-        <UIBox class="col-span-12 md:col-span-2">Picture</UIBox>
-        <UIBox class="col-span-12 md:col-span-10">
-          {{ profile.username }} (<AgeShow :profile="profile" />)
-        </UIBox>
+      <div v-for="profile in profiles.data" :key="profile.id" class="grid grid-cols-12 gap-2 mb-4 pb-4">
+        <UserPreview :profile="profile" />
       </div>
     </div>
   </div>
@@ -56,9 +53,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
-import UIBox from '@/Components/UI/UIBox.vue'
-import AgeShow from '@/Components/AgeShow.vue'
 import UIPagination from '@/Components/UI/UIPagination.vue'
+import UserPreview from '@/Components/User/UserPreview.vue'
 
 const props = defineProps({
   profiles: Object,

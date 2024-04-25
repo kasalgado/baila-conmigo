@@ -13,6 +13,9 @@
             <Link :href="route('search.index')">Buscar</Link>
           </div>
           <div v-if="user" class="p-2">
+            <Link :href="route('favorite.index')">Favoritos</Link>
+          </div>
+          <div v-if="user" class="p-2">
             <Link :href="route('profile.index')">Profil</Link>
           </div>
           <div class="p-2">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
@@ -35,4 +36,6 @@ Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 
 Route::resource('/register', RegisterController::class)->only('create', 'store');
 Route::resource('/address', AddressController::class)->only('create', 'store');
-Route::resource('/message', MessageController::class)->only('index', 'show', 'create', 'store', 'destroy')->middleware('auth');
+Route::resource('/message', MessageController::class)->only('index', 'show', 'create', 'store', 'destroy')
+  ->middleware('auth');
+Route::resource('/favorite', FavoriteController::class)->middleware('auth');

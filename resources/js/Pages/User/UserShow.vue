@@ -3,7 +3,7 @@
     <UIBox class="mb-2">
       <div>Usuario: {{ profile.username }}</div>
       <div>Nombres: <UserNames :user="profile" /></div>
-      <div>Edad: <AgeShow :profile="profile" /></div>
+      <div>Edad: <UserAge :profile="profile" /></div>
       <div>Dirección: {{ address.street }}</div>
     </UIBox>
     <div>
@@ -15,8 +15,8 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3'
-import UserNames from '@/Components/UserNames.vue'
-import AgeShow from '@/Components/AgeShow.vue'
+import UserNames from '@/Components/User/UserNames.vue'
+import UserAge from '@/Components/User/UserAge.vue'
 import UIBox from '@/Components/UI/UIBox.vue'
 
 defineProps({

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-2xl">{{ message.from_user_id.username }} (<AgeShow :profile="message.from_user_id" />)</div>
+  <div class="text-2xl">{{ message.from_user_id.username }} (<UserAge :profile="message.from_user_id" />)</div>
   <div class="text-gray-500">{{ createdAt }}</div>
   <div class="grid grid-cols-12 gap-4 mt-2 mb-2">
     <UIBox class="items-center col-span-12 md:col-span-2">
@@ -19,7 +19,7 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3'
-import AgeShow from '@/Components/AgeShow.vue'
+import UserAge from '@/Components/User/UserAge.vue'
 import UIBox from '@/Components/UI/UIBox.vue'
 import { formatDate } from '@/Composables/formatDate'
 import DeleteButton from '@/Components/UI/DeleteButton.vue'
