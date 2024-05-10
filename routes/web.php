@@ -38,4 +38,5 @@ Route::resource('/register', RegisterController::class)->only('create', 'store')
 Route::resource('/address', AddressController::class)->only('create', 'store');
 Route::resource('/message', MessageController::class)->only('index', 'show', 'create', 'store', 'destroy')
   ->middleware('auth');
-Route::resource('/favorite', FavoriteController::class)->middleware('auth');
+Route::resource('/favorite', FavoriteController::class)->except('create')->middleware('auth');
+Route::get('favorite/create/{id}', [FavoriteController::class, 'create'])->name('favorite.create')->middleware('auth');

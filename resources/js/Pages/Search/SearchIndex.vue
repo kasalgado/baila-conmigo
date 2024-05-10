@@ -41,7 +41,11 @@
     </form>
     <div class="col-span-12 md:col-span-10">
       <div v-for="profile in profiles.data" :key="profile.id" class="grid grid-cols-12 gap-2 mb-4 pb-4">
-        <UserPreview :profile="profile" />
+        <UserPreview :profile="profile">
+          <template v-slot:buttons>
+            <UIBtnFavorite :route="route('favorite.create', profile.id)" />
+          </template>
+        </UserPreview>
       </div>
     </div>
   </div>
@@ -55,6 +59,7 @@ import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import UIPagination from '@/Components/UI/UIPagination.vue'
 import UserPreview from '@/Components/User/UserPreview.vue'
+import UIBtnFavorite from '@/Components/UI/UIBtnFavorite.vue'
 
 const props = defineProps({
   profiles: Object,

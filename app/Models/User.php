@@ -52,6 +52,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $appends = ['favorite'];
+
+    public function setFavoriteAttribute(bool $favorite): void
+    {
+        $this->favorite = $favorite;
+    }
+
+    public function getFavoriteAttribute(): bool
+    {
+        return true;
+    }
+
     public function address(): HasOne
     {
         return $this->hasOne(Address::class);

@@ -14,7 +14,7 @@
       Responder
     </Link>
   </button>
-  <DeleteButton :route="route('message.destroy', message.id)" />
+  <UIBtnDelete :route="route('message.destroy', message.id)" />
 </template>
 
 <script setup>
@@ -22,7 +22,7 @@ import { Link } from '@inertiajs/vue3'
 import UserAge from '@/Components/User/UserAge.vue'
 import UIBox from '@/Components/UI/UIBox.vue'
 import { formatDate } from '@/Composables/formatDate'
-import DeleteButton from '@/Components/UI/DeleteButton.vue'
+import UIBtnDelete from '@/Components/UI/UIBtnDelete.vue'
 import { computed } from 'vue'
 
 const props = defineProps({

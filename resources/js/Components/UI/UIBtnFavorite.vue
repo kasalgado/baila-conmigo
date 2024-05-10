@@ -1,6 +1,6 @@
 <template>
-  <button class="btn-delete">
-    <Link :href="route" method="delete" as="button">Delete</Link>
+  <button>
+    <Link :href="route" as="button" class="btn-success">Favorito</Link>
   </button>
 </template>
 

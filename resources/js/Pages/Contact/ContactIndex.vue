@@ -3,13 +3,13 @@
   <UIBox v-for="contact in contacts" :key="contact.id" class="mb-4">
     <Link :href="route('contact.show', contact.id)">
       <div>{{ contact.message }}</div>
-      <DeleteButton :route="route('contact.destroy', contact.id)" />
+      <UIBtnDelete :route="route('contact.destroy', contact.id)" />
     </Link>
   </UIBox>
 </template>
 
 <script setup>
-import DeleteButton from '@/Components/UI/DeleteButton.vue'
+import UIBtnDelete from '@/Components/UI/UIBtnDelete.vue'
 import { Link } from '@inertiajs/vue3'
 import UIBox from '@/Components/UI/UIBox.vue'
 
