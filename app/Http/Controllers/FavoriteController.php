@@ -14,9 +14,6 @@ use Inertia\Response;
 
 class FavoriteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): Response
     {
         $favorites = Auth::user()->favorites;

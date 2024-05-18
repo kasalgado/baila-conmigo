@@ -16,6 +16,7 @@ class SearchController extends Controller
     {
         $filters = $request->only(['username', 'minimum', 'maximum']);
         $profiles = User::createdAt()
+            ->isNotAdmin()
             ->filter($filters)
             ->paginate(3)
             ->withQueryString();
@@ -23,12 +24,12 @@ class SearchController extends Controller
 
         foreach ($profiles as $profile) {
             foreach ($userFavorites as $favorite) {
-                if ($favorite->id === $profile->id) {
-                    $profile->setFavoriteAttribute(true);
+                if ($profile->id === $favorite->fav_user_id) {
+                    $profile->favorite = true;
                     continue 2;
                 }
             }
-        }dd($profiles);
+        }
         
         return Inertia::render('Search/SearchIndex', [
             'filters' => $filters,

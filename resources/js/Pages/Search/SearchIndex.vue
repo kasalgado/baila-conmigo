@@ -43,7 +43,12 @@
       <div v-for="profile in profiles.data" :key="profile.id" class="grid grid-cols-12 gap-2 mb-4 pb-4">
         <UserPreview :profile="profile">
           <template v-slot:buttons>
-            <UIBtnFavorite :route="route('favorite.create', profile.id)" />
+            <div v-if="!profile.favorite">
+              <UIBtnFavorite :route="route('favorite.create', profile.id)" />
+            </div>
+            <div v-else>
+              Favorite
+            </div>
           </template>
         </UserPreview>
       </div>

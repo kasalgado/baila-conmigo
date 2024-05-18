@@ -52,18 +52,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $appends = ['favorite'];
-
-    public function setFavoriteAttribute(bool $favorite): void
-    {
-        $this->favorite = $favorite;
-    }
-
-    public function getFavoriteAttribute(): bool
-    {
-        return true;
-    }
-
     public function address(): HasOne
     {
         return $this->hasOne(Address::class);
@@ -87,6 +75,11 @@ class User extends Authenticatable
     public function scopeCreatedAt(Builder $query): Builder
     {
         return $query->orderByDesc('created_at');
+    }
+
+    public function scopeIsNotAdmin(Builder $query): Builder
+    {
+        return $query->where('is_admin', false);
     }
 
     public function scopeFilter(Builder $query, array $filters): Builder
