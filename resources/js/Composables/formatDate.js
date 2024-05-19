@@ -1,11 +1,5 @@
-import { computed } from 'vue'
+export function formatDate (dateAsString) {
+  const date = new Date(dateAsString)
 
-export const formatDate = (dateAsString) => {
-  const formated = computed(() => {
-    const date = new Date(dateAsString)
-
-    return new Intl.DateTimeFormat('default', { dateStyle: 'full' }).format(date)
-  })
-
-  return { formated }
+  return new Intl.DateTimeFormat('default', { dateStyle: 'full' }).format(date)
 }

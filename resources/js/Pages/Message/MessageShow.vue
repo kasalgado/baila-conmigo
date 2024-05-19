@@ -29,7 +29,7 @@ const props = defineProps({
   message: Object,
   user: Object
 })
-const { createdAt } = formatDate(props.message.created_at)
+const createdAt = formatDate(props.message.created_at)
 const answer = computed(
   () => props.user.id !== props.message.from_user_id.id
 )

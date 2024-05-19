@@ -69,7 +69,7 @@ class User extends Authenticatable
 
     public function favorites(): HasMany
     {
-        return $this->hasMany(Favorite::class);
+        return $this->hasMany(Favorite::class)->latest();
     }
 
     public function scopeCreatedAt(Builder $query): Builder

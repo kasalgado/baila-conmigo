@@ -8,6 +8,7 @@
     <Link :href="route('profile.show', message.from_user_id.id)" as="button">
       <span class="font-bold text-gray-500">{{ message.from_user_id.username }}</span>
     </Link>
+    <div class="text-gray-500 text-sm">{{ formatDate(message.created_at) }}</div>
     <div>{{ message.message }}</div>
     <Link :href="route('message.show', message.id)" as="button">Abrir</Link> |
     <Link :href="route('message.destroy', message.id)" as="button" method="delete">Borrar</Link>
@@ -17,6 +18,7 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
 import UIBox from '@/Components/UI/UIBox.vue'
+import { formatDate } from '@/Composables/formatDate'
 
 defineProps({
   messages: Array

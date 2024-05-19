@@ -14,9 +14,15 @@ use Inertia\Response;
 
 class FavoriteController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $favorites = Auth::user()->favorites;
+        $filters = [
+            'deleted' => $request->boolean('deleted'),
+        ];
+        $favorites = Auth::user()
+            ->favorites()
+            ->filter($filters)
+            ->get();
 
         foreach ($favorites as &$favorite) {
             $favorite->fav_user_id = User::find($favorite->fav_user_id);
@@ -66,11 +72,11 @@ class FavoriteController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Favorite $favorite): RedirectResponse
     {
-        //
+        $this->authorize('delete', $favorite);
+        $favorite->deleteOrFail();
+
+        return redirect()->back()->with('success', 'Favorito borrado');
     }
 }
