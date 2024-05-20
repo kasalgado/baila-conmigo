@@ -17,14 +17,13 @@ class MessageController extends Controller
 {
     public function index(Request $request, MessageService $messageService): Response
     {
-        if ($request->type == 'sent') {
-            $messages = $messageService->getSent($request->user());
-        } else {
-            $messages = $messageService->getReceived($request->user());
-        }
+        $filters = $request->only([
+            'action',
+        ]);
+        $messages = Message::filters($filters)->get();
 
         return Inertia::render('Message/MessageIndex', [
-            'messages' => $messages,
+            'messages' => $messageService->prepared($messages),
         ]);
     }
 
